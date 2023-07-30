@@ -1,1 +1,0 @@
-require("oskarin_vim")
