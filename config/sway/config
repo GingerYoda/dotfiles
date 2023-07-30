@@ -19,7 +19,6 @@ set $term kitty
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
-
 include /etc/sway/config-vars.d/*
 
 ### Output configuration
@@ -27,12 +26,8 @@ include /etc/sway/config-vars.d/*
 #output eDP-1 pos 3840 10800
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/oskari/Pictures/Wallpapers/ds_wallpaper.jpg fill
-#
-# Example configuration:
-#
 output HDMI-A-1 resolution 3840x2160 
-#
+output * bg /home/osku/Pictures/dark_souls_sun_wallpaper.jpg fill
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
 ### Idle configuration
@@ -62,8 +57,8 @@ exec swayidle -w \
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 input "type:keyboard" {
-    xkb_layout fi,us,dvorak
-    xkb_options ctrl:swapcaps,grp:win_space_toggle  
+xkb_layout dvficstm
+xkb_options ctrl:swapcaps,grp:win_space_toggle  
 }
 #================================================================================ 
 ### Key bindings
@@ -136,6 +131,7 @@ input "type:keyboard" {
     bindsym $mod+Shift+8 move container to workspace number 8
     bindsym $mod+Shift+9 move container to workspace number 9
     bindsym $mod+Shift+0 move container to workspace number 10
+
     # Move workspace to different screen 
     bindsym $mod+Shift+Left move workspace to output left
     bindsym $mod+Shift+Right move workspace to output right
@@ -150,6 +146,7 @@ input "type:keyboard" {
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
     bindsym $mod+b exec brave-browser 
+
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
