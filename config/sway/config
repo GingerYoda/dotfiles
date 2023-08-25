@@ -22,17 +22,12 @@ set $menu dmenu_path | dmenu | xargs swaymsg exec --
 include /etc/sway/config-vars.d/*
 
 ### Output configuration
-#output DP-2 pos 0 0
-#output eDP-1 pos 3840 10800
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output HDMI-A-1 resolution 3840x2160 
-output * bg /home/osku/Pictures/dark_souls_sun_wallpaper.jpg fill
 # You can get the names of your outputs by running: swaymsg -t get_outputs
+output eDP-1 pos 2560 0
+output  'BenQ Corporation ZOWIE XL LCD T8H02551SL0' mode 2560x1440 pos 0 0
+output * bg /home/oskari/Pictures/Wallpapers/ds_wallpaper.jpg fill
 
 ### Idle configuration
-#
-# Example configuration:
 #
 exec swayidle -w \
           timeout 300 'swaylock -f -c 000000' \
@@ -57,7 +52,7 @@ exec swayidle -w \
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 input "type:keyboard" {
-xkb_layout dvficstm
+xkb_layout fi,dvficstm
 xkb_options ctrl:swapcaps,grp:win_space_toggle  
 }
 #================================================================================ 
@@ -205,6 +200,11 @@ bindsym $mod+r mode "resize"
 #================================================================================ 
 # Keybindings
     bindsym $mod+Shift+s exec screenshot
+#================================================================================ 
+
+#================================================================================ 
+# Mouse
+    mouse_warping none
 #================================================================================ 
 
 #================================================================================ 
