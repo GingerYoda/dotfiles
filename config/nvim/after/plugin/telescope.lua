@@ -4,4 +4,4 @@ vim.keymap.set('n', '<C-p>', builtin.git_files, {})
 vim.keymap.set('n', '<leader>ps', function()
 	builtin.grep_string({ search = vim.fn.input("Grep > ") });
 end)
-
+vim.api.nvim_set_keymap('n', '<Leader>pa', ':lua require"telescope.builtin".find_files({ hidden = true })<CR>', {noremap = true, silent = true})

@@ -8,25 +8,18 @@ return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.1',
+        'nvim-telescope/telescope.nvim', tag = '0.1.5',
         -- or                            , branch = '0.1.x',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
-
-    use({'water-sucks/darkrose.nvim',
-    as = 'darkrose',})
---    use({
---        'rebelot/kanagawa.nvim',
---        as = 'kanagawa',
---        config = function()
---            vim.cmd('colorscheme kanagawa')
---        end
---    })
+    use "savq/melange-nvim"
 
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
-    use('prettier/vim-prettier', { run = 'yarn install --frozen-lockfile --production' })
-    use('nvim-treesitter/playground')
-    use('theprimeagen/harpoon')
+    use {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        requires = { { "nvim-lua/plenary.nvim" } }
+    }
     use("mbbill/undotree")
     use('tpope/vim-fugitive')
     use {
@@ -54,6 +47,31 @@ return require('packer').startup(function(use)
 
     use {
         "windwp/nvim-autopairs",
-         config = function() require("nvim-autopairs").setup {} end
+        config = function() require("nvim-autopairs").setup {} end
     }
+
+    use {
+        "nvim-neorg/neorg",
+        config = function()
+            require('neorg').setup {
+                load = {
+                    ["core.defaults"] = {},  -- Loads default behaviour
+                    ["core.concealer"] = {}, -- Adds pretty icons to your documents
+                    ["core.dirman"] = {      -- Manages Neorg workspaces
+                        config = {
+                            workspaces = {
+                                notes = "~/notes",
+                            },
+                            default_workspace = "notes",
+                        },
+                    },
+                },
+            }
+        end,
+        run = ":Neorg sync-parsers",
+        requires = "nvim-lua/plenary.nvim",
+    }
+
+    use 'mfussenegger/nvim-dap'
+    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 end)
