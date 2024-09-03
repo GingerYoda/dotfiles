@@ -10,6 +10,7 @@ vim.keymap.set("n", "<F5>", ":lua require'dap'.continue()<CR>")
 vim.keymap.set("n", "<F10>", ":lua require'dap'.step_over()<CR>")
 vim.keymap.set("n", "<F11>", ":lua require'dap'.step_into()<CR>")
 vim.keymap.set("n", "<F12>", ":lua require'dap'.step_out()<CR>")
+vim.keymap.set("n", "<leader><F12>", ":lua require'dap'.terminate()<CR>")
 vim.keymap.set("n", "<leader>bb", ":lua require'dap'.toggle_breakpoint()<CR>")
 
 dap.configurations.cpp = {
@@ -21,7 +22,21 @@ dap.configurations.cpp = {
       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
     end,
     cwd = "${workspaceFolder}",
-    stopAtBeginningOfMainSubprogram = false,
+    stopAtBeginningOfMainSubprogram = true,
+  },
+}
+
+
+dap.configurations.c = {
+  {
+    name = "Launch",
+    type = "gdb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = "${workspaceFolder}",
+    stopAtBeginningOfMainSubprogram = true,
   },
 }
 
@@ -40,3 +55,29 @@ end
 dap.listeners.before.event_exited.dapui_config = function()
   dapui.close()
 end
+
+vim.api.nvim_create_user_command("RunScriptWithArgs", function(t)
+	-- :help nvim_create_user_command
+	args = vim.split(vim.fn.expand(t.args), '\n')
+	approval = vim.fn.confirm(
+		"Will try to run:\n    " ..
+		vim.bo.filetype .. " " ..
+		vim.fn.expand('%') .. " " ..
+		t.args .. "\n\n" ..
+		"Do you approve? ",
+		"&Yes\n&No", 1
+	)
+	if approval == 1 then
+		dap.run({
+			type = vim.bo.filetype,
+			request = 'launch',
+			name = 'Launch file with custom arguments (adhoc)',
+			program = '${file}',
+			args = args,
+		})
+	end
+end, {
+	complete = 'file',
+	nargs = '*'
+})
+vim.keymap.set('n', '<F4>', ":RunScriptWithArgs ")

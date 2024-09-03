@@ -12,7 +12,8 @@ return require('packer').startup(function(use)
         -- or                            , branch = '0.1.x',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
-    use "savq/melange-nvim"
+    -- use "savq/melange-nvim"
+    use 'luisiacc/gruvbox-baby'
 
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
     use {
@@ -52,26 +53,21 @@ return require('packer').startup(function(use)
 
     use {
         "nvim-neorg/neorg",
+        rocks = { "lua-utils.nvim", "nvim-nio", "nui.nvim", "plenary.nvim", "pathlib.nvim" },
+        tag = "*", -- Pin Neorg to the latest stable release
         config = function()
-            require('neorg').setup {
-                load = {
-                    ["core.defaults"] = {},  -- Loads default behaviour
-                    ["core.concealer"] = {}, -- Adds pretty icons to your documents
-                    ["core.dirman"] = {      -- Manages Neorg workspaces
-                        config = {
-                            workspaces = {
-                                notes = "~/notes",
-                            },
-                            default_workspace = "notes",
-                        },
-                    },
-                },
-            }
+            require("neorg").setup()
         end,
-        run = ":Neorg sync-parsers",
-        requires = "nvim-lua/plenary.nvim",
     }
 
     use 'mfussenegger/nvim-dap'
-    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+    use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } }
+    use {
+        'akinsho/flutter-tools.nvim',
+        requires = {
+            'nvim-lua/plenary.nvim',
+            'stevearc/dressing.nvim', -- optional for vim.ui.select
+        },
+    }
+    use 'JuliaEditorSupport/julia-vim'
 end)
