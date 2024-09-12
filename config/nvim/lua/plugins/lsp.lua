@@ -26,7 +26,7 @@ return {
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
-                "lua_ls",
+                "lua_ls", "clangd"
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -71,7 +71,10 @@ return {
                 { name = 'luasnip' }, -- For luasnip users.
             }, {
                 { name = 'buffer' },
-            })
+            }),
+            completion = {
+                autocomplete = false
+            },
         })
 
         vim.diagnostic.config({
