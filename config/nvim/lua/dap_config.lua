@@ -11,7 +11,7 @@ vim.keymap.set("n", "<F10>", ":lua require'dap'.step_over()<CR>")
 vim.keymap.set("n", "<F11>", ":lua require'dap'.step_into()<CR>")
 vim.keymap.set("n", "<F12>", ":lua require'dap'.step_out()<CR>")
 vim.keymap.set("n", "<leader><F12>", ":lua require'dap'.terminate()<CR>")
-vim.keymap.set("n", "<leader>bb", ":lua require'dap'.toggle_breakpoint()<CR>")
+vim.keymap.set("n", "<F9>", ":lua require'dap'.toggle_breakpoint()<CR>")
 
 dap.configurations.cpp = {
   {
