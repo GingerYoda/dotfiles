@@ -6,10 +6,11 @@ set $left h
 set $down j
 set $up k
 set $right l
-set $term kitty
+set $term alacritty
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
 set $display0 "eDP-1"
 set $display1 "BNQ ZOWIE XL LCD T8H02551SL0"
+set $wacom "1386:891:Wacom_One_by_Wacom_M_Pen"
 
 #================================================================================
 # general settings and services 
@@ -25,7 +26,7 @@ bar {
 #================================================================================
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 output * bg /home/osku/kuvat/IMG20230919072752.jpg fill
-output $display1 pos 0 0
+#output $display1 pos 0 0
 
 default_border none
 
@@ -35,23 +36,40 @@ exec swayidle -w \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
 
 workspace 1 output eDP-1
+assign [app_id="Alacritty"] workspace number 7
+assign [class="Brave-browser"] workspace number 8
+assign [class="Spotify"] workspace number 9
+assign [class="Signal"] workspace number 10
 
 #================================================================================
 # Input configuration
 #================================================================================
 for_window [title="Unamed village builder"] floating enable
 for_window [class="Godot"] floating enable
-
+for_window [class="MATLAB R2024b - academic use"] floating enable
+for_window [instance="Godot_Engine"] floating enable
+for_window [title="RuneLite"] floating enable
+for_window [class="BoltLauncher"] floating enable
+for_window [class="net-runelite-client-RuneLite"] floating enable
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
 input "type:keyboard" {
-	xkb_layout dvficstm
-	xkb_options ctrl:swapcaps
+	xkb_layout "dvficstm"
+	xkb_options ctrl:nocaps
 }
 
-input "Lift Mouse" {
-    dwt enabled
-    accel_profile "flat" 
-    pointer_accel -1.0 
-}
+#input $wacom map_to_output $display0
+input $wacom map_to_output $display1
+
 
 #================================================================================
 # key bindings 
@@ -186,6 +204,8 @@ mode "resize" {
     bindsym $mod+Shift+b exec brave
     bindsym $mod+period exec makoctl dismiss -a
     bindsym $mod+Shift+s exec ~/dotfiles/scripts/screenshot.sh
+    #bindsym $mod+Shift+s exec ~/dotfiles/scripts/screenshot_to_clipboard.sh
+    bindsym $mod+Shift+Escape exec swaylock -f -c 000000
 
 
 
