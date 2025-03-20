@@ -7,3 +7,7 @@ bold_italic = { family = "LiterationMono Nerd Font Mono", style = "Bold Italic" 
 
 [mouse]
 hide_when_typing = true
+
+[window]
+padding = { x = 0, y = 8 }
+
