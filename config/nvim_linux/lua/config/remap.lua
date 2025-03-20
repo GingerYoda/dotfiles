@@ -35,3 +35,15 @@ end)
 
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
+local function make_with_args()
+ vim.ui.input({ prompt = 'Make args: ' }, function(input)
+  if input and input ~= "" then
+   vim.cmd.make(input)
+  end
+ end)
+end
+
+vim.keymap.set("n", "<space>ma", make_with_args)
+
+
+
