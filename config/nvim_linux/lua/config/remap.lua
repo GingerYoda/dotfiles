@@ -44,6 +44,7 @@ vim.keymap.set("n", "<leader>mm", function()
   vim.cmd('silent! make')
   vim.cmd.copen()
   vim.cmd.wincmd("L")
+  vim.opt_local.wrap = true
 end)
 
 
