@@ -1,6 +1,5 @@
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
+vim.g.maplocalleader = ","
 vim.keymap.set("n", "<leader><leader>x", ":source%<CR>")
 vim.keymap.set("n", "<leader>x", ":.lua<CR>")
 vim.keymap.set("v", "<leader>x", ":lua<CR>")
