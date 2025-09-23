@@ -13,7 +13,6 @@ return {
     config = function()
       local statusline = require("lualine")
       statusline.setup {
-	options = {theme = "gruvbox-baby"}
       }
     end
   }

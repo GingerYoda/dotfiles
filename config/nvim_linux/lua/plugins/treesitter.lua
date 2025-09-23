@@ -19,5 +19,7 @@ return {
 	additional_vim_regex_highlighting = false,
       },
     })
+    vim.treesitter.language.register('glsl', 'fs')  -- the someft filetype will use the python parser and queries.
+    vim.treesitter.language.register('glsl', 'vs')  -- the someft filetype will use the python parser and queries.
   end
 }

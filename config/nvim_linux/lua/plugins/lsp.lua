@@ -19,23 +19,39 @@ return {
     require("lspconfig").lua_ls.setup ({
       capabilities = capabilities
     })
-    -- require("lspconfig").clangd.setup({
-    --   capabilities = capabilities
-    -- })
+    require("lspconfig").gopls.setup ({
+      capabilities = capabilities
+    })
+    require("lspconfig").clangd.setup({
+      capabilities = capabilities
+    })
+    vim.lsp.inlay_hint.enable(false)
+    vim.diagnostic.enable(true)
+    vim.diagnostic.config({
+      virtual_text = false,
+      underline = false,
+      signs = false,
+    })
     vim.api.nvim_create_autocmd('LspAttach', {
       callback = function(args)
-	local opts = { buffer = 0 }
-	local telescope = require("telescope.builtin")
-	vim.keymap.set("n", "gd", function() telescope.lsp_definitions() end, opts)
-	vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
-	vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-	vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-	vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-	vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-	vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-	vim.keymap.set("i", "<C-s>", function() vim.lsp.buf.signature_help() end, opts)
+        local opts = { buffer = 0 }
+        local telescope = require("telescope.builtin")
+        vim.keymap.set("n", "gd", function() telescope.lsp_definitions() end, opts)
+        vim.keymap.set("n", "gi", function() telescope.lsp_implementations() end, opts)
+        vim.keymap.set("n", "<leader>grr", function() vim.lsp.buf.references() end, opts)
+        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+        vim.keymap.set("n", "<leader>gws", function() vim.lsp.buf.workspace_symbol() end, opts)
+        vim.keymap.set("n", "gl", function() vim.diagnostic.open_float() end, opts)
+        vim.keymap.set("n", "<leader>gca", function() vim.lsp.buf.code_action() end, opts)
+        vim.keymap.set("n", "<leader>grn", function() vim.lsp.buf.rename() end, opts)
+        vim.keymap.set("n", "<leader>gcs", "<cmd>ClangdSwitchSourceHeader<CR>", opts)
+        vim.keymap.set("i", "<C-s>", function() vim.lsp.buf.signature_help() end, opts)
+        vim.keymap.set("n", "<C-s>", function() vim.lsp.buf.signature_help() end, opts)
+        vim.keymap.set('n', 'gK', function()
+          local new_config = not vim.diagnostic.config().virtual_lines
+          vim.diagnostic.config({ virtual_lines = new_config })
+        end, { desc = 'Toggle diagnostic virtual_lines' })
       end
-
     })
   end,
 }

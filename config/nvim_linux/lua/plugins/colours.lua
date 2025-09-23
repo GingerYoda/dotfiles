@@ -1,8 +1,9 @@
 return {
   {
-    "luisiacc/gruvbox-baby",
-    config = function() vim.cmd.colorscheme("gruvbox-baby") end
+    "blazkowolf/gruber-darker.nvim",
+    config = function() vim.cmd.colorscheme("gruber-darker") end
   }
 }
+    --"luisiacc/gruvbox-baby"
 
 

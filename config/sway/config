@@ -48,12 +48,14 @@ assign [class="Signal"] workspace number 10
 #================================================================================
 for_window [title="Unamed village builder"] floating enable
 for_window [class="Godot"] floating enable
+for_window [class="krita"] floating enable
 for_window [class="MATLAB R2024b - academic use"] floating enable
 for_window [instance="Godot_Engine"] floating enable
 for_window [title="RuneLite"] floating enable
 for_window [class="BoltLauncher"] floating enable
 for_window [class="net-runelite-client-RuneLite"] floating enable
 for_window [app_id="game_project"] floating enable
+for_window [title="LearnOpenGL"] floating enable
 # Example configuration:
 #
 #   input "2:14:SynPS/2_Synaptics_TouchPad" {
