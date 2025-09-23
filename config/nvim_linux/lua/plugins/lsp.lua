@@ -26,11 +26,11 @@ return {
       capabilities = capabilities
     })
     vim.lsp.inlay_hint.enable(false)
-    vim.diagnostic.enable(true)
+    vim.diagnostic.enable(false)
     vim.diagnostic.config({
       virtual_text = false,
       underline = false,
-      signs = false,
+      --signs = false,
     })
     vim.api.nvim_create_autocmd('LspAttach', {
       callback = function(args)

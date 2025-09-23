@@ -18,10 +18,6 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set({"n"}, "<leader>pp", [["+p]])
-vim.keymap.set("n", "<leader>mm", function()
-  vim.api.nvim_command("wall")
-  vim.cmd.make()
-end)
 
 
 vim.keymap.set("n", "<leader>st", function()
@@ -37,11 +33,17 @@ local function make_with_args()
  vim.ui.input({ prompt = 'Make args: ' }, function(input)
   if input and input ~= "" then
    vim.cmd.make(input)
+  vim.cmd.copen()
+  vim.cmd.wincmd("L")
   end
  end)
 end
 
-vim.keymap.set("n", "<space>ma", make_with_args)
-
+vim.keymap.set("n", "<leader>mm", function()
+  vim.api.nvim_command("wall")
+  vim.cmd('silent! make')
+  vim.cmd.copen()
+  vim.cmd.wincmd("L")
+end)
 
 
