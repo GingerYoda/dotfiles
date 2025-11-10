@@ -40,7 +40,7 @@ return {
         vim.keymap.set("n", "gi", function() telescope.lsp_implementations() end, opts)
         vim.keymap.set("n", "<leader>grr", function() vim.lsp.buf.references() end, opts)
         vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-        vim.keymap.set("n", "<leader>gws", function() vim.lsp.buf.workspace_symbol() end, opts)
+        vim.keymap.set("n", "<leader>ws", function() vim.lsp.buf.workspace_symbol() end, opts)
         vim.keymap.set("n", "gl", function() vim.diagnostic.open_float() end, opts)
         vim.keymap.set("n", "<leader>gca", function() vim.lsp.buf.code_action() end, opts)
         vim.keymap.set("n", "<leader>grn", function() vim.lsp.buf.rename() end, opts)

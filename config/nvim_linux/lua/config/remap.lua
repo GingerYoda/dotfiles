@@ -3,7 +3,7 @@ vim.g.maplocalleader = ","
 vim.keymap.set("n", "<leader><leader>x", ":source%<CR>")
 vim.keymap.set("n", "<leader>x", ":.lua<CR>")
 vim.keymap.set("v", "<leader>x", ":lua<CR>")
-vim.keymap.set("n", "<leader>pv", ":Ex<CR>")
+--vim.keymap.set("n", "<leader>pv", ":Ex<CR>")
 vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>")
 vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -29,22 +29,17 @@ end)
 
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
-local function make_with_args()
- vim.ui.input({ prompt = 'Make args: ' }, function(input)
-  if input and input ~= "" then
-   vim.cmd.make(input)
-  vim.cmd.copen()
-  vim.cmd.wincmd("L")
-  end
- end)
-end
+vim.keymap.set("n", "<leader>ma", function()
+  vim.ui.input({ prompt = 'Make args: ' }, function(input)
+    if input and input ~= "" then
+      vim.cmd.make({ mods = { silent = true}, args = { input } })
+    end
+  end)
+end)
 
 vim.keymap.set("n", "<leader>mm", function()
   vim.api.nvim_command("wall")
   vim.cmd('silent! make')
-  vim.cmd.copen()
-  vim.cmd.wincmd("L")
-  vim.opt_local.wrap = true
 end)
 
 
