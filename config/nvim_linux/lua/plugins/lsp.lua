@@ -16,13 +16,14 @@ return {
   },
   config = function()
     local capabilities = require("blink.cmp").get_lsp_capabilities()
-    require("lspconfig").lua_ls.setup ({
+    vim.lsp.config('lua_ls', {
       capabilities = capabilities
     })
-    require("lspconfig").gopls.setup ({
+    vim.lsp.config('gopls', {
       capabilities = capabilities
     })
-    require("lspconfig").clangd.setup({
+    vim.lsp.enable('clangd')
+    vim.lsp.config('clangd', {
       capabilities = capabilities
     })
     vim.lsp.inlay_hint.enable(false)
@@ -44,7 +45,7 @@ return {
         vim.keymap.set("n", "gl", function() vim.diagnostic.open_float() end, opts)
         vim.keymap.set("n", "<leader>gca", function() vim.lsp.buf.code_action() end, opts)
         vim.keymap.set("n", "<leader>grn", function() vim.lsp.buf.rename() end, opts)
-        vim.keymap.set("n", "<leader>gcs", "<cmd>ClangdSwitchSourceHeader<CR>", opts)
+        vim.keymap.set("n", "<leader>gcs", "<cmd>LspClangdSwitchSourceHeader<CR>", opts)
         vim.keymap.set("i", "<C-s>", function() vim.lsp.buf.signature_help() end, opts)
         vim.keymap.set("n", "<C-s>", function() vim.lsp.buf.signature_help() end, opts)
         vim.keymap.set('n', 'gK', function()

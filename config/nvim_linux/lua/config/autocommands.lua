@@ -3,5 +3,6 @@ vim.api.nvim_create_autocmd("QuickFixCmdPost", {
   callback = function()
     vim.cmd("copen")
     vim.cmd("wincmd L")
+    vim.cmd("setlocal wrap")
   end,
 })

@@ -7,31 +7,36 @@ return {
     },
     config = function()
       require("telescope").setup{
-	pickers = {
-	  diagnostics = {
-	    theme = "ivy"
-	  },
-	  lsp_document_symbols = {
-	    theme = "ivy"
-	  },
-	},
-	extensions = {
-	  fzf = {}
-	}
+        pickers = {
+          diagnostics = {
+            theme = "ivy"
+          },
+          lsp_document_symbols = {
+            theme = "ivy"
+          },
+        },
+        extensions = {
+          fzf = {}
+        }
       }
       require("telescope").load_extension("fzf")
+      require("config.multigrep").setup()
       vim.keymap.set("n", "<leader>pf", require('telescope.builtin').find_files)
       vim.keymap.set("n", "<leader>ed", require('telescope.builtin').diagnostics)
       vim.keymap.set("n", "<leader>ph", require('telescope.builtin').help_tags)
       vim.keymap.set("n", "<leader>pws", require('telescope.builtin').lsp_workspace_symbols)
       vim.keymap.set("n", "<leader>pds", require('telescope.builtin').lsp_document_symbols)
+      vim.keymap.set("n", "<leader>pb", require('telescope.builtin').buffers)
       vim.keymap.set("n", "<leader>en", function()
-	require('telescope.builtin').find_files {
-	  cwd = vim.fn.stdpath("config")
-	}
-      end,
-      require("config.multigrep").setup()
-    )
+        require('telescope.builtin').find_files {
+          cwd = vim.fn.stdpath("config")
+        }
+      end)
+      vim.keymap.set("n", "<leader>si", function()
+        require('telescope.builtin').find_files {
+          cwd = "/usr/include"
+        }
+      end)
     end
   }
 }

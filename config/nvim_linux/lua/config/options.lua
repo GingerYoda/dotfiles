@@ -23,3 +23,4 @@ set.isfname:append("@-@")
 set.updatetime = 50
 set.colorcolumn = "80"
 set.cursorline = true
+set.path:append("**")
